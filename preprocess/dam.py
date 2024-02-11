@@ -10,7 +10,7 @@ from tqdm import tqdm
 from .seg_info import seginfo_constructor, gen_vehicle_num
 from .graph_embedding import traj_freq
 from .utils import load_paths
-from microdict import mdict
+# from microdict import mdict
 import geopandas as gpd
 
 
@@ -26,8 +26,10 @@ class SparseDAM(object):
         self.mat_row = np.zeros(seg_num, dtype=object)
         cnt = 0
         for i in range(seg_num):
-            self.mat_col[i] = mdict.create(dtype="i32:i32")
-            self.mat_row[i] = mdict.create(dtype="i32:i32")
+            # self.mat_col[i] = mdict.create(dtype="i32:i32")
+            # self.mat_row[i] = mdict.create(dtype="i32:i32")
+            self.mat_col[i] = {}
+            self.mat_row[i] = {}
         for tmp in data:
             self.mat_col[tmp[1]][tmp[0]] = tmp[2]
             self.mat_row[tmp[0]][tmp[1]] = tmp[2]

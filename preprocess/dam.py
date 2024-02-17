@@ -74,11 +74,21 @@ class SparseDAM(object):
 
 
 @numba.jit(nopython=False, fastmath=True, forceobj=True)
-def get_connection_strength_matrix_sparse(paths, seg_num):
+def get_connection_strength_matrix_sparse(paths, seg_num, start_time):
+    # try:
+    #     assert type(paths[0][0]) == int
+    # except:
+    #     for i in range(len(paths)):
+    #         paths[i] = list(map(int, paths[i]))
+    # assert type(paths) == list
+    # assert type(paths[0]) == list
+    # assert type(seg_num) == int
+    # assert seg_num > int(max(paths[0]))
+    
     unigram = np.zeros(seg_num, dtype=np.int32)
     mat_all = [{} for i in range(seg_num)]
 
-    start_time = time()
+    # start_time = time()
     for traj in paths:
         length = len(traj)
         for i in range(length):
@@ -107,10 +117,12 @@ def gen_dam(args):
 
     speed_info = np.zeros(seg_num, dtype=float)
     for k, v in speeds.items():
-        speed_info[k] = np.mean(v)
+        # print(type(k), type(v))
+        speed_info[int(k)] = np.mean(v)
     print("==> speed size: {}".format(len(speeds)))
 
-    unigram, mat_a = get_connection_strength_matrix_sparse(paths, seg_num)
+    # unigram, mat_a = get_connection_strength_matrix_sparse(paths, seg_num)
+    unigram, mat_a = get_connection_strength_matrix_sparse(paths, seg_num, time())
     with open(os.path.join(args.workspace, "csm_all.txt"), 'w') as fp:
         fields_output_file = csv.writer(fp, delimiter=' ')
         fields_output_file.writerows(mat_a)

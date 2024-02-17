@@ -205,15 +205,15 @@ def train(model, train_loader, valid_loader, device, opt, hparams):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--workspace', type=str, default="data/sfl_100")
-    parser.add_argument('--output_dir', type=str, default="data/sfl_100/model_keyseg")
+    parser.add_argument('--workspace', type=str, default="data/pt_data")
+    parser.add_argument('--output_dir', type=str, default="data/pt_data/model_keyseg")
     parser.add_argument('-seed', type=int, default=42)
     parser.add_argument('-epochs', type=int, default=1000)
     parser.add_argument('-lr_base', type=float, default=1e-3)
     parser.add_argument('-gpu_id', type=str, default="0")
     parser.add_argument('--training_file', type=str, default="train_keysegs.txt")
     parser.add_argument('-city', type=str,
-                        choices=['porto_large', 'beijing_large', 'chengdu_large', 'xian_large', 'sanfran_large'], default='sanfran_large')
+                        choices=['porto_large', 'beijing_large', 'chengdu_large', 'xian_large', 'sanfran_large'], default='porto_large')
     parser.add_argument("-cpu", action="store_true", dest="force_cpu")
     opt = parser.parse_args()
     print(opt)

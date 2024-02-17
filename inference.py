@@ -19,16 +19,16 @@ class RoutePlanner(object):
     def __init__(self, workspace, model_ckpt, device, max_seq_len=79, len_need_keyseg=3000, break_tie="all", debug=False):
         self.G = load_road_graph(os.path.join(workspace, "road_graph_wtime"))
         if model_ckpt is None:
-            city = 'chengdu'
-            if 'ptl' in workspace:
+            city = 'edin'
+            if 'pt' in workspace:
                 city = 'porto_large'
-            elif 'bjl' in workspace:
+            elif 'bj' in workspace:
                 city = 'beijing_large'
-            elif 'cdl' in workspace:
+            elif 'cd' in workspace:
                 city = 'chengdu_large'
-            elif 'xal' in workspace:
+            elif 'xa' in workspace:
                 city = 'xian_large'
-            elif 'sfl' in workspace:
+            elif 'sf' in workspace:
                 city = 'sanfran_large'
             print("[Info] City: {}".format(city))
             hparams = dict_to_object(keyseg_para[city])
@@ -423,6 +423,7 @@ def do_prediction(data, planner, k=1, batch_size=32, debug=False):
 
 
 def infer():
+    print("INFERRRRRRRRRRRRRRRRRRRRRRRRRRRR")
     parser = argparse.ArgumentParser(description='routeplanning.py')
     parser.add_argument('--workspace', type=str, default="data/sfl_100")
     parser.add_argument('--test_file', type=str, default="sanfran_large/traj_test")

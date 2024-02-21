@@ -169,7 +169,10 @@ def seginfo_constructor(edges, speeds, freqs):
         azimuth = calc_azimuth([float(start[0]), float(start[1]), float(end[0]), float(end[1])])
         eid = tmp['fid']
         length = tmp['length']
-        rt = get_road_type(tmp['highway'])
+        try:
+            rt = get_road_type(tmp['highway'])
+        except:
+            rt = get_road_type(tmp['type'])
         speed = speeds[eid]
         if speed < 1e-2:
             speed = get_speed(rt)

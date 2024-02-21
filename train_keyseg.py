@@ -205,8 +205,10 @@ def train(model, train_loader, valid_loader, device, opt, hparams):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--workspace', type=str, default="data/pt_data")
-    parser.add_argument('--output_dir', type=str, default="data/pt_data/model_keyseg")
+    parser.add_argument('--workspace', type=str, default="adapted_data/Edin")
+    parser.add_argument('--output_dir', type=str, default="adapted_data/Edin/model_keyseg")
+    # parser.add_argument('--workspace', type=str, default="data/pt_data")
+    # parser.add_argument('--output_dir', type=str, default="data/pt_data/model_keyseg")
     parser.add_argument('-seed', type=int, default=42)
     parser.add_argument('-epochs', type=int, default=1000)
     parser.add_argument('-lr_base', type=float, default=1e-3)

@@ -37,22 +37,22 @@ for trajID in traj:
 # stack the traj records in a list
 traj_list = []
 for trajID, traj_records in traj.items():
-    objID = traj_records[0]['userID'] # userID as objID
+    objID = traj_records[0]['userID'].split('@')[0] # userID as objID
     offsets = []
     offsets.append((0, # distance between start of the traj to the start of the segment
-            traj_records[0]['startTime'], # start time of first poi as departure time
-            poi[traj_records[0]['poiID']]['poiLon'],
-            poi[traj_records[0]['poiID']]['poiLat']))
+            int(traj_records[0]['startTime']), # start time of first poi as departure time
+            float(poi[traj_records[0]['poiID']]['poiLon']),
+            float(poi[traj_records[0]['poiID']]['poiLat'])))
     offsets.append((0, # distance between start of the traj to the start of the segment
-            traj_records[-1]['startTime'], # start time of last poi as departure time
-            poi[traj_records[-1]['poiID']]['poiLon'],
-            poi[traj_records[-1]['poiID']]['poiLat']))
+            int(traj_records[-1]['startTime']), # start time of last poi as departure time
+            float(poi[traj_records[-1]['poiID']]['poiLon']),
+            float(poi[traj_records[-1]['poiID']]['poiLat'])))
     segSeq = []
     for record in traj_records:
-        segSeq.append([record['poiID'], # segment id
-                    record['startTime'], # entering time of this segment
+        segSeq.append([int(record['poiID']), # segment id
+                    int(record['startTime']), # entering time of this segment
                     10, # avg speed of this segment
-                    record['poiDuration']]) # duration of this segment
+                    int(record['poiDuration'])]) # duration of this segment
     traj_list.append([objID, trajID, offsets, segSeq])
     
 # split the traj_list into train, test and validation set
